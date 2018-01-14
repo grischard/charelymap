@@ -1,0 +1,32 @@
+- Maps © [[https://www.thunderforest.com|Thunderforest]], Data © [[http://www.openstreetmap.org/copyright|OpenStreetMap contributors]]
+- Backgrounds
+- 	Pioneer
+- 	Topo histo
+- 	Ortho 2010
+Overpass data
+-	Narrow/Normal width
+	Dash?
+-	Colour?
+- Panel
+-	It has to be a panel
+	Text
+		What is it
+		Why
+		What it isn't
+			Exhaustive old rail
+			No minor railways
+			No sidings, yards, spurs
+			Some missing (list)
+			Existing rails -> see openrailwaymap
+		Credits / Sources
+		It's wrong! How to contribute
+	Can we control the layers from there?
+- Pop-up
+- 	Start
+- 	End
+- 	Network
+- 	Wikipedia
+- 	Website
+- Text label
+- 	Name (without Ancienne ligne)
+-	Name:lb
