@@ -12,7 +12,7 @@ POImap.init = function() {
             maxzoom: 22
         }),
 
-        ortho2010 = new L.tileLayer('https://wmts3.geoportail.lu/opendata/wmts/ortho_2010/GLOBAL_WEBMERCATOR_4_V3/{z}/{x}/{y}.jpeg', {
+        ortho2017 = new L.tileLayer('https://wmts3.geoportail.lu/opendata/wmts/ortho_2017/GLOBAL_WEBMERCATOR_4_V3/{z}/{x}/{y}.jpeg', {
             // opacity: 0.6,
             attribution: ['Images CC-0 <a href="https://geoportail.lu/" target="_blank">Administration du Cadastre et de la Topographie</a>', attr_osm, attr_overpass].join(' &mdash; '),
             maxzoom: 22,
@@ -31,9 +31,13 @@ POImap.init = function() {
             detectRetina: true
         }),
 
-        transport = new L.TileLayer('//{s}.tile.thunderforest.com/transport/{z}/{x}/{y}.png', {
+        transport = new L.TileLayer('//{s}.tile.thunderforest.com/transport/{z}/{x}/{y}.png?apikey=38175149cbe84e19b4d6bc30da71082d', {
             attribution: ['<a href="http://blog.gravitystorm.co.uk/2011/04/11/transport-map/">Gravitystorm Transport Map</a>', attr_osm, attr_overpass].join(', ')
         });
+        opencyclemap = new L.TileLayer('https://{s}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png?apikey=38175149cbe84e19b4d6bc30da71082d', {
+            attribution: ['<a href="http://thunderforest.com/maps/opencyclemap/">Gravitystorm Open Cycle Map</a>', attr_osm, attr_overpass].join(', ')
+        });
+
 
 
     map = new L.Map('map', {
@@ -49,7 +53,8 @@ POImap.init = function() {
             'Pioneer (OpenStreetMap)': pioneer,
             'Hansen 1927': hansen,
             'Carte topographique de 1954': topo54,
-            'Ortho 2010': ortho2010,
+            'Ortho 2017': ortho2017,
+            'OpenCycleMap': opencyclemap,
         },{},{position: 'topright'});
         return function() {
             return ctrl;

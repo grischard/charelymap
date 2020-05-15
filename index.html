@@ -1,1 +1,241 @@
-charely.html
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+    <head>
+        <title>
+            Charely Map
+        </title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript">
+</script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-rc.3/leaflet.js" type="text/javascript">
+</script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment-with-locales.min.js" type="text/javascript">
+</script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-rc.3/leaflet.css" type="text/css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="leaflet-sidebar.min.css" type="text/css">
+        <script src="map-train.js" type="text/javascript">
+</script>
+        <script src="map.charely.js" type="text/javascript">
+</script>
+        <script src="leaflet-sidebar.min.js" type="text/javascript">
+</script>
+        <script type="text/javascript">
+$(function() {
+        charely.init();
+        });
+
+        </script>
+        <style type="text/css">
+        body {
+            padding: 0;
+            margin: 0;
+        }
+        html, body, #map {
+            height: 100%;
+            font: 10pt "Helvetica Neue", Arial, Helvetica, sans-serif;
+            background-color: white;
+        }
+        .sidebar-pane h4 {
+            margin: 0 0 5px;
+            color: #777;
+        }
+        .active {
+            box-shadow: 0 1px 7px rgba(0,0,0,0.65);
+        }
+
+        /* sidebar modification */
+        .sidebar-tabs {
+            height: 36px;
+            width: 36px;
+        	border-radius: 4px;
+        	/*background-color: rgba(0, 0, 0, 0.25);*/
+        	background-color: rgba(255, 255, 255);
+        	/*background: none;*/
+        	box-shadow: 0 1px 7px rgba(0,0,0,0.65);
+        }
+        .sidebar-tabs:hover {
+            background-color: #eee;
+        }
+        .sidebar-tabs-item:hover {
+            background-color: rgba(0,0,0,0) !important;
+        }
+        .sidebar {
+            z-index: 999;
+            overflow:visible;
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+        }
+        .sidebar.leaflet-touch {
+            box-shadow: none;
+            border-right: 0 solid rgba(0, 0, 0, 0);
+        }
+        @media (min-width: 768px) {
+            .sidebar {
+                border-radius: 0;
+            }
+            .sidebar.leaflet-touch {
+                border: 0 solid rgba(0, 0, 0, 0);
+            }
+            .sidebar.collapsed ~ .sidebar-map .leaflet-left {
+                left: 50px;
+            }
+
+        }
+        .fa-question-circle {
+            font-size: 1.4em;
+        }
+
+        /* TO DO -- FIX THIS position layer control */
+/*        .leaflet-top .leaflet-control {
+            margin-top: 20px;
+            margin-left: -40px;
+        }
+        */
+        .leaflet-top .leaflet-control-zoom {
+            margin-top: 10px;
+            margin-left: -40px;
+        }
+        /* leaflet control locate modifications */
+/*        .leaflet-bar a, .leaflet-bar a:hover {
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+        }*/
+</style>
+    </head>
+    <body>
+        <div id="sidebar" class="sidebar collapsed">
+            <!-- Nav tabs -->
+            <ul class="sidebar-tabs" role="tablist">
+            <li class="sidebar-tabs-item"><a href="#readme" role="tab" class="foo"><i class="fa fa-question-circle"></i></a></li>
+            </ul><!-- Tab panes -->
+            <div class="sidebar-content active">
+                <div class="sidebar-pane" id="readme">
+                    <h4>
+                        À propos
+                    </h4>
+                    <p>
+                        Les anciennes lignes de chemin de fer du Luxembourg ont surtout été abandonnées au milieu du XX<sup>e</sup> siècle. Les <i>Charely</i>, <i>Jhangeli</i> et <i>Benni</i> ne sont pas pourtant oubliés, et de nombreux vestiges permettent de retrouver leur tracé.
+                    </p>
+                    <p>
+                        La <b>Charely Map</b> montre les 183 km de voie étroite ( <i class="fa fa-paint-brush" style="color: #A61B4A" aria-hidden="true"></i> rouge clair) et 90% des 147 km de voie normale ( <i class="fa fa-paint-brush" style="color: #59191F" aria-hidden="true"></i> rouge foncé) disparus.
+                    </p>
+                    <p>
+                        <img style="width: 26px; height: 26px" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-rc.1/images/layers-2x.png"> Choisir une couche:
+                    </p>
+                    <ul>
+                        <li>La carte par défaut <a href="http://www.thunderforest.com/maps/pioneer/">Pioneer</a> est une carte actuelle d'un style désuet; la carte Transport est son équivalent moderne. La belle carte Hansen de 1927 et les photos aériennes de 2010 sont de haute qualité. Certains trains ont déjà disparu sur la carte de 1954.
+                        <li>Les lignes peuvent être (dé)cochées pour être (des)activées.
+                        </li>
+                    </ul>
+                    <p>
+
+                    <p>
+                        Un clic sur une ligne permet d’afficher plus d’informations.
+                    </p>
+                    <h4>
+                        Pourquoi&nbsp;?
+                    </h4>
+                    <p>
+                        Passionné de trains et et travaillant comme consultant pour <a href="https://data.public.lu">le portail Open Data</a>, j’ai croisé toutes les sources disponibles pour créer un plan détaillé et digitalisé du réseau disparu.
+                    </p>
+                    <p>
+                        La <a href="http://www.rail.lu/cartelux1939.html">carte schématique</a> montrant toutes les voies a 77 ans, n’est pas digitalisée, et est à une petite échelle. Impossible de voir où passait le train au fond du jardin.
+                    </p>
+                    <p>
+                        L’Administration du Cadastre et de la Topographie s’est lancée dans l’Open Data. Les photos aériennes et anciennes cartes topographiques ouvertes du géoportail sont librement utilisables pour créer ce genre de cartes.
+                    </p>
+                    <h4>
+                        Ce que cette carte n’est pas
+                    </h4>
+
+                        <h5>Cette carte ne montre pas tous les anciens chemins de fer</h5>
+                        <p>
+                            Elle contient uniquement les voies «&nbsp;principales&nbsp;», à voie normale ou étroite.</p>
+                        </p>
+                            <h5>Pas de chemins de fer mineurs</h5>
+                        <p>
+                            Je n’ai pas de bonnes sources pour les «&nbsp;petits&nbsp;» chemins de fers industriels et miniers, plans inclinés, transporteurs aériens, embranchements particuliers, etc.</p>
+                            <h5>Pas (beaucoup) de gares de triages, voies de garage et d’évitements</h5>
+                            <p>Les cartes topographiques du géoportail ne comprennent que les voies «&nbsp;principales&nbsp;», et je n’ai pas trouvé de cartes anciennes à des plus grandes échelles.
+                        </p>
+                        <h5>Il manque certaines lignes</h5>
+                        <p>
+                            Il reste quelques kilomètres de voie normale à cartographier:
+                            <ul>
+                            <li>Wasserbillig - Grevenmacher</li>
+                            <li>Differdange - Thillenberg</li>
+                            <li>Esch/Alzette - Hoehl</li>
+                            <li>Esch/Alzette - Galgenberg (Esch-Neudorf)</li>
+                            </ul>
+                        </p>
+                        <h5>Il manque les lignes qui existent ou sont construction</h5>
+                        <p>
+                            Le site <a href="http://www.openrailwaymap.org/?lat=49.8362&amp;lon=6.0967&amp;zoom=10">OpenRailwayMap</a> fait ça bien mieux que moi&nbsp;!
+                        </p>
+                        <h4>
+                        Est-ce que les informations fournies sont fiables&nbsp;?
+                    </h4>
+                    <p>
+                        Autant que possible. Les anciennes cartes sont parfois fausses ou décalées, les photos aériennes ne montrent pas toujours clairement les anciens tracés, et la digitalisation n’est pas toujours parfaite.
+                    </p>
+                    <h4>
+                        J’ai trouvé une erreur&nbsp;! Il manque quelque chose&nbsp;! Je veux contribuer&nbsp;!
+                    </h4>
+                    <p>
+                        Super&nbsp;! <a href="mailto:guillaume%40rischard.org">guillaume@rischard.org</a>.
+                    </p>
+                    <h4>
+                        C’est commercial, payant...&nbsp;?
+                    </h4>
+                    <p>
+                        Non. Toutes les données sont <a href="https://www.openstreetmap.org/about">librement réutilisables</a>&nbsp;!
+                    </p>
+                    <h4>Pourquoi «&nbsp;Charely&nbsp;»&nbsp;?</h4>
+                        <p><a href="https://lb.wikipedia.org/wiki/Eisebunnsstreck_L%C3%ABtzebuerg_-_Iechternach">C'est le surnom de l'ancienne ligne Luxembourg - Echternach</a>
+                    <h4>
+                        Crédits et sources
+                    </h4>
+                    <p>
+                        Les données se basent sur:
+                    </p>
+                    <ul>
+                        <li>OpenStreetMap
+                        </li>
+                        <li>La carte Hansen de 1927, via les services Open Data du Géoportail
+                        </li>
+                        <li>La carte topographique de 1954, via les services Open Data du Géoportail
+                        </li>
+                        <li>La carte topographique couleur 1/20k de 1964, via les services Open Data du Géoportail
+                        </li>
+                        <li>La carte topographique 1/5k de 2016, via les services Open Data du Géoportail
+                        </li>
+                        <li>Les photos aériennes de 2001, 2004, 2007, 2010 et 2013, via les services Open Data du Géoportail
+                        </li>
+                        <li>Ed Federmeyer (2001), <a href="http://gar.lu/newshop/buecher/schmalspurbahnen-in-luxemburg-band-1.php"><i>Schmalspurbahnen in Luxemburg</i></a>
+                        </li>
+                        <li>Les plans d’assemblage cadastraux (<i>Übersichtskarten</i>) de Lorraine pendant la période Allemande, via gallica.bnf.fr
+                        </li>
+                    </ul>
+                    <p>
+                        <i>Grousse Merci</i> à:
+                    </p>
+                    <ul>
+                        <li>Pierre Carier, qui a tracé beaucoup d’anciennes lignes sur OpenStreetMap
+                        </li>
+                        <li>Remy Dhur de l’Administration du Cadastre et de la Topographie
+                        </li>
+                        <li>
+                            <a href="http://www.raildar.fr/">Raildar</a>
+                        </li>
+                        <li>
+                            <a href="http://www.openrailwaymap.org/%C2%A0?lang=&amp;lat=49.8362&amp;lon=6.0967&amp;zoom=10">OpenRailwayMap</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="map" class="sidebar-map"></div>
+    </body>
+</html>
